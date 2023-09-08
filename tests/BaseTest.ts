@@ -1,8 +1,7 @@
-import { PageManager } from "../Pages/PageManager";
+import { PageManager } from '../Pages/PageManager';
 import {test as base} from '@playwright/test';
 
 export const test = base.extend<{pageManager: PageManager}>({
-
     page: async ({browser}, use) => {
         const page = await browser.newPage();
         await page.goto('/');

@@ -6,10 +6,11 @@ export class ProductsPage extends BasePage{
         ElementLabsBackpack: this.page.locator("//div[text()='Sauce Labs Backpack']"),
         LargeInventoryDetails: this.page.locator("//div[@class='inventory_details_name large_size']"),
         IсonCart: this.page.locator(".shopping_cart_link"),
-    }
+    };
 
     Buttons = {
         AddToCartLabsBackpack: this.page.locator("//button[@id='add-to-cart-sauce-labs-backpack']"),
-    }
+        Remove: this.page.locator("//button[@id='remove-sauce-labs-backpack']"),
+    };
 
 }
