@@ -2,7 +2,8 @@ import { BasePage } from './BasePage';
 
 export class CheckoutYourInformationPage extends BasePage{
     Locators = {
-        TitleCheckout: this.page.locator("//span[text()='Checkout: Your Information']"),
+        TitleYourInformation: this.page.locator('"Checkout: Your Information"'),
+        ErrorContainer: this.page.locator('error-message-container error'),
     };
 
     InputFields = {
@@ -13,7 +14,7 @@ export class CheckoutYourInformationPage extends BasePage{
 
     Buttons = {
         Continue: this.page.locator("//input[@id='continue']"),
-    }
+    };
 
     async checkoutInfo(firstName, lastName, zipPostalCode){
         await this.InputFields.FirstName.fill(firstName);

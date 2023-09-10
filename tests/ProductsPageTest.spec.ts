@@ -1,31 +1,61 @@
 import { test, expect } from './BaseTest';
 
-    test('Inventory details large size', async({pageManager})=>{
+    test('Detailed info about backpack', async({pageManager})=>{
         await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
-        await expect(pageManager.productsPage.Locators.Title).toBeVisible();
+        await expect(pageManager.productsPage.Locators.TitleProducts).toBeVisible();
         await pageManager.productsPage.Locators.ElementLabsBackpack.click();
-        await expect(pageManager.productsPage.Locators.LargeInventoryDetails).toHaveText('Sauce Labs Backpack');
+        await expect(pageManager.productsPage.Locators.DetailedNameBackpack).toHaveText('Sauce Labs Backpack');
+        await expect(pageManager.productsPage.Locators.DetailedDescriptionBackpack).toContainText('carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
+        await expect(pageManager.productsPage.Locators.DetailedPriceBackpack).toContainText('$29.99');
     })
 
-    test('Сheck that the shopping cart page has opened successfully', async({pageManager})=>{
+    test('Check that the shopping cart page has opened successfully', async({pageManager})=>{
         await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
-        await expect(pageManager.productsPage.Locators.Title).toBeVisible();
-        await pageManager.productsPage.Locators.IсonCart.click();
-        await expect(pageManager.cartPage.Locators.YourCart).toBeVisible();
+        await expect(pageManager.productsPage.Locators.TitleProducts).toBeVisible();
+        await pageManager.productsPage.Locators.IconCart.click();
+        await expect(pageManager.cartPage.Locators.TitleYourCart).toBeVisible();
     })
 
-    test.only('Labs Backpack to cart and checkout', async({pageManager})=>{
+    test('The add to cart button changes to remove', async({pageManager})=>{
         await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
-        await expect(pageManager.productsPage.Locators.Title).toBeVisible();
+        await expect(pageManager.productsPage.Buttons.AddToCartLabsBackpack).toHaveText('Add to cart');
         await pageManager.productsPage.Buttons.AddToCartLabsBackpack.click();
-        await expect(pageManager.productsPage.Buttons.Remove).toHaveText('Remove');
-        await pageManager.productsPage.Locators.IсonCart.click();
-        await expect(pageManager.cartPage.Locators.YourCart).toHaveText('Your Cart')
+        await expect(pageManager.productsPage.Buttons.RemoveCartLabsBackpack).toHaveText('Remove');
+    })
+
+    test('Labs Backpack to cart and checkout', async({pageManager})=>{
+        await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
+        await expect(pageManager.productsPage.Locators.TitleProducts).toHaveText('Products');
+        await pageManager.productsPage.Buttons.AddToCartLabsBackpack.click();
+        await pageManager.productsPage.Locators.IconCart.click();
+        await expect(pageManager.cartPage.Locators.TitleYourCart).toHaveText('Your Cart')
         await expect(pageManager.cartPage.Locators.LabsBackpack).toHaveText('Sauce Labs Backpack');
         await pageManager.cartPage.Buttons.Checkout.click();
-        await expect(pageManager.checkoutYourInformationPage.Locators.TitleCheckout).toHaveText('Checkout: Your Information');
+        await expect(pageManager.checkoutYourInformationPage.Locators.TitleYourInformation).toHaveText('Checkout: Your Information');
         await pageManager.checkoutYourInformationPage.checkoutInfo('Andrew', 'Zaits', '212013');
         await pageManager.checkoutYourInformationPage.Buttons.Continue.click();
-        await expect(pageManager.checkoutOverviewPage.Locators.Tittle).toHaveText('Checkout: Overview');
-        //not finished
+        await expect(pageManager.checkoutOverviewPage.Locators.TitleOverview).toHaveText('Checkout: Overview');
+        await expect(pageManager.checkoutOverviewPage.Locators.LabsBackpack).toHaveText('Sauce Labs Backpack');
+        await pageManager.checkoutOverviewPage.Buttons.Finish.click();
+        await expect(pageManager.checkoutCompletePage.Locators.TitleComplete).toHaveText('Checkout: Complete!');
+        await expect(pageManager.checkoutCompletePage.Locators.CompleteContainer).toBeVisible();
+    })
+
+    test('Update the cart icon to the value 1', async({pageManager})=>{
+        await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
+        await expect(pageManager.productsPage.Locators.IconCart).toBeEmpty();
+        await pageManager.productsPage.Buttons.AddToCartLabsBackpack.click();
+        await expect(pageManager.productsPage.Locators.IconCart).toContainText('1');
+    })
+
+    test('Number of products', async({pageManager})=>{
+        await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
+        await expect(pageManager.productsPage.Locators.InventoryList).toHaveCount(6);
+    })
+
+    test.skip('Product filter', async({pageManager})=>{
+        await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
+        await pageManager.productsPage.Buttons.Filter.click();
+        await pageManager.productsPage.Locators.FilterElementZA.click();
+        //Error: locator.click: Target closed
     })

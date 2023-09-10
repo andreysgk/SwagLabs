@@ -2,15 +2,20 @@ import { BasePage } from "./BasePage";
 
 export class ProductsPage extends BasePage{
     Locators = {
-        Title: this.page.locator("//span[@class='title']"),
+        TitleProducts: this.page.locator('"Products"'),
         ElementLabsBackpack: this.page.locator("//div[text()='Sauce Labs Backpack']"),
-        LargeInventoryDetails: this.page.locator("//div[@class='inventory_details_name large_size']"),
-        IсonCart: this.page.locator(".shopping_cart_link"),
+        DetailedNameBackpack: this.page.locator("//div[@class='inventory_details_name large_size']"),
+        DetailedDescriptionBackpack: this.page.locator("//div[@class='inventory_details_desc large_size']"),
+        DetailedPriceBackpack: this.page.locator("//div[@class='inventory_details_price']"),
+        IconCart: this.page.locator(".shopping_cart_link"),
+        FilterElementAZ: this.page.locator("//option[@value='az']"),
+        FilterElementZA: this.page.locator("//option[@value='za']"),
+        InventoryList: this.page.locator('.inventory_item'),
     };
 
     Buttons = {
         AddToCartLabsBackpack: this.page.locator("//button[@id='add-to-cart-sauce-labs-backpack']"),
-        Remove: this.page.locator("//button[@id='remove-sauce-labs-backpack']"),
+        RemoveCartLabsBackpack: this.page.locator("//button[@id='remove-sauce-labs-backpack']"),
+        Filter: this.page.locator("//span[@class='select_container']"),
     };
-
 }
