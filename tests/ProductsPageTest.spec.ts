@@ -41,6 +41,18 @@ import { test, expect } from './BaseTest';
         await expect(pageManager.checkoutCompletePage.Locators.CompleteContainer).toBeVisible();
     })
 
+    test('Make a checkout without adding a thing to cart. @negative test', async({pageManager})=>{
+        await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
+        await pageManager.productsPage.Locators.IconCart.click();
+        await pageManager.cartPage.Buttons.Checkout.click();
+        await expect(pageManager.checkoutYourInformationPage.Locators.TitleYourInformation).toHaveText('Checkout: Your Information');
+        await pageManager.checkoutYourInformationPage.checkoutInfo('Andrew', 'Zaits', '212013');
+        await pageManager.checkoutYourInformationPage.Buttons.Continue.click();
+        await pageManager.checkoutOverviewPage.Buttons.Finish.click();
+        await expect(pageManager.checkoutCompletePage.Locators.TitleComplete).toHaveText('Checkout: Complete!');
+        await expect(pageManager.checkoutCompletePage.Locators.CompleteContainer).toBeVisible();
+    })
+
     test('Update the cart icon to the value 1', async({pageManager})=>{
         await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
         await expect(pageManager.productsPage.Locators.IconCart).toBeEmpty();
