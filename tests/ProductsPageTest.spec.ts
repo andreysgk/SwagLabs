@@ -69,5 +69,4 @@ import { test, expect } from './BaseTest';
         await pageManager.loginPage.logIn('standard_user', 'secret_sauce');
         await pageManager.productsPage.Buttons.Filter.click();
         await pageManager.productsPage.Locators.FilterElementZA.click();
-        //Error: locator.click: Target closed
     })
