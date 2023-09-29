@@ -18,5 +18,6 @@ export class LoginPage extends BasePage{
         await this.InputFields.UserName.fill(userName);
         await this.InputFields.Password.fill(password);
         await this.Buttons.Login.click();
+        
     };
 }
