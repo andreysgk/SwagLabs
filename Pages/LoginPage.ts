@@ -1,6 +1,7 @@
 import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage{
+    
     Locators = {
         Error: this.page.locator("//div[@class='error-message-container error']/h3"),
     };
@@ -18,6 +19,5 @@ export class LoginPage extends BasePage{
         await this.InputFields.UserName.fill(userName);
         await this.InputFields.Password.fill(password);
         await this.Buttons.Login.click();
-        
     };
 }
