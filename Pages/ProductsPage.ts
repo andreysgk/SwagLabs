@@ -17,6 +17,5 @@ export class ProductsPage extends BasePage{
         AddToCartLabsBackpack: this.page.locator("//button[@id='add-to-cart-sauce-labs-backpack']"),
         RemoveCartLabsBackpack: this.page.locator("//button[@id='remove-sauce-labs-backpack']"),
         Filter: this.page.locator("//span[@class='select_container']"),
-        
     };
 }
